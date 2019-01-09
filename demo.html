@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>modal-demo</title>
+    <script type="text/javascript" src="./modal.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
+    <style type="text/css">
+        button {
+            float: right;
+            margin: 0 0.5rem
+        }
+
+        p {
+            display: inline-block;
+            position: relative;
+            left: 50%;
+            transform: translate(-50%)
+        }
+    </style>
+</head>
+
+<body>
+    <button id="modal-login">登录</button>
+    <button id="modal-register">注册</button>
+    <!--登录弹窗-->
+    <div class="dialog-login">
+        <header>
+            <h2 class="title">登录</h2>
+        </header>
+        <content>
+            <div class="input-group">
+                <h4>用户名</h4>
+                <input type="text">
+            </div>
+            <div class="input-group">
+                <h4>密码</h4>
+                <input type="text">
+            </div>
+        </content>
+        <footer>
+            <div>
+                <p class="target-to-register">没有账号？点击注册</p>
+            </div>
+            <div>
+                <button class="submit">提交</button>
+                <button class="closed">关闭</button>
+            </div>
+        </footer>
+    </div>
+    <!--登录弹窗-->
+    <!--注册弹窗-->
+    <div class="dialog-register">
+        <header>
+            <h2 class="title">注册</h2>
+        </header>
+        <content>
+            <div class="input-group">
+                <h4>用户名</h4>
+                <input type="text" value="6~15位字母或数字">
+            </div>
+            <div class="input-group">
+                <h4>密码</h4>
+                <input type="text" value="至少6位字母或数字">
+            </div>
+            <div class="input-group">
+                <h4>再次输入密码</h4>
+                <input type="text" value="至少6位字母或数字">
+            </div>
+            <div class="input-group">
+                <h4>邮箱</h4>
+                <input type="text" value="例如：123@123.com">
+            </div>
+        </content>
+        <footer>
+            <div>
+                <p class="target-to-login">已有账号？点击登录</p>
+            </div>
+            <div>
+                <button class="submit">提交</button>
+                <button class="closed">关闭</button>
+            </div>
+        </footer>
+    </div>
+    <!--注册弹窗-->
+
+    <p>注册、登录modal弹窗demo</p>
+</body>
+
+</html>
