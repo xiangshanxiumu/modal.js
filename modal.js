@@ -110,10 +110,12 @@
             }
             /*mask触发事件*/
             this.mask.onclick = function () {
-                that.setOpacity(that.mask, 0) // 回调函数 透明度调到0 后 再设置display为none?
-                that.mask.style.display = 'none'
-                console.log(that.dialog)
-                that.dialog.style.display = 'none'
+                that.setOpacity(that.mask, 0, function () {
+                    //console.log(this) // 此处this 指代window
+                    that.mask.style.display = 'none'
+                    that.dialog.style.display = 'none'
+                })
+
             }
             /**提交按钮的事件 */
             /*提交按钮触发 提交内容事件*/
@@ -121,29 +123,30 @@
                 //that.submit.submit()
             }
             this.submit.onmouseover = function () {
-                that.submit.style.backgroundColor = '#33A1FF'
+                this.style.backgroundColor = '#33A1FF'
             }
             this.submit.onmouseout = function () {
-                that.submit.style.backgroundColor = '#3388FF'
+                this.style.backgroundColor = '#3388FF'
             }
             /** 关闭按钮的事件*/
             this.closed.onclick = function () {
-                that.setOpacity(that.mask, 0)
-                that.mask.style.display = 'none'
-                that.dialog.style.display = 'none'
+                that.setOpacity(that.mask, 0, function () {
+                    that.mask.style.display = 'none'
+                    that.dialog.style.display = 'none'
+                })
             }
             this.closed.onmouseover = function () {
-                that.closed.style.backgroundColor = '#D55360'
+                this.style.backgroundColor = '#D55360'
             }
             this.closed.onmouseout = function () {
-                that.closed.style.backgroundColor = '#DC3545'
+                this.style.backgroundColor = '#DC3545'
             }
             /**footer窗口左侧的字体 鼠标事件 */
             this.footer.children[0].onmouseover = function () {
-                that.footer.children[0].style.color = 'blue'
+                this.children[0].style.color = 'blue'
             }
             this.footer.children[0].onmouseout = function () {
-                that.footer.children[0].style.color = ''
+                this.children[0].style.color = ''
             }
             /**注册对话框 input添加 聚焦 失焦事件 */
             if (this.targetDom.id === 'modal-register') {
@@ -152,7 +155,6 @@
                 for (var k = 0; k < this.input.length; k++) {
                     this.input[k].style.color = '#999'
                     //this.input[k].style.fontSize = '1.25rem'
-
                     inputArr.push(this.input[k].value) //inputArr 记住input 原value值
                     /*聚焦事件*/
                     this.input[k].onfocus = function () {
@@ -179,10 +181,11 @@
                 this.toggle = this.dialog.getElementsByClassName('target-to-register')[0]
                 var targetDom = document.getElementById('modal-register') //或者注册节点
                 this.toggle.onclick = function () {
-                    that.setOpacity(that.mask, 0)
-                    that.mask.style.display = 'none'
-                    that.dialog.style.display = 'none'
-                    targetDom.onclick() //触发注册节点
+                    that.setOpacity(that.mask, 0, function () {
+                        that.mask.style.display = 'none'
+                        that.dialog.style.display = 'none'
+                        targetDom.onclick() //触发注册节点
+                    })
                 }
             }
             /*注册窗口跳转登录窗口*/
@@ -190,15 +193,16 @@
                 this.toggle = this.dialog.getElementsByClassName('target-to-login')[0]
                 var targetDom = document.getElementById('modal-login') //或者登录节点
                 this.toggle.onclick = function () {
-                    that.setOpacity(that.mask, 0)
-                    that.mask.style.display = 'none'
-                    that.dialog.style.display = 'none'
-                    targetDom.onclick() //触发登录节点
+                    that.setOpacity(that.mask, 0, function () {
+                        that.mask.style.display = 'none'
+                        that.dialog.style.display = 'none'
+                        targetDom.onclick() //触发登录节点
+                    })
                 }
             }
         },
         /*封装操作opacity动画函数 */
-        setOpacity: function (ele, target) {
+        setOpacity: function (ele, target, callback) {
             /*如果目标元素opacity已经等于目标值，跳出执行*/
             if (ele.style.opacity === target) {
                 return false
@@ -219,6 +223,7 @@
                     }
                 }
             }, 50)
+            callback && callback()
         }
     }
 
