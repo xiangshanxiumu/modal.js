@@ -1,6 +1,6 @@
 window.onload = function () {
     //创建登录窗口
-    var modallogin = new Modal({
+    const modallogin = new Modal({
         targetId: 'modal-login',
         dialog: {
             width: "25rem",
@@ -8,7 +8,7 @@ window.onload = function () {
         }
     });
     //创建注册窗口
-    var modalregister = new Modal({
+    const modalregister = new Modal({
         targetId: 'modal-register',
         dialog: {
             width: "30rem",

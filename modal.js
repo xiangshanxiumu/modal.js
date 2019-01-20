@@ -23,82 +23,46 @@
             this.mask = document.createElement('div')
             document.body.appendChild(this.mask)
 
-            this.mask.className = 'mask'
-            this.mask.style.display = 'none'
-            this.mask.style.position = 'fixed'
-            this.mask.style.left = 0
-            this.mask.style.top = 0
-            this.mask.style.right = 0
-            this.mask.style.bottom = 0
-            this.mask.style.zIndex = 80
-            this.mask.style.backgroundColor = 'black'
-            this.mask.style.opacity = 0
+            let maskStyle = "display:none;position:fixed;left:0;top:0;right:0;bottom:0;z-index:80;background-color:black;opacity:0;"
+            this.mask.style.cssText += maskStyle
 
             /*中间dialog对话框*/
             this.dialog.style.width = this.dialogWidth
-            this.dialog.style.borderRadius = '0.25rem'
-            this.dialog.style.padding = '1rem'
             this.dialog.style.backgroundColor = this.dialogBackGroundColor
-            this.dialog.style.position = 'fixed'
-            this.dialog.style.left = '50%'
-            this.dialog.style.top = '50%'
-            this.dialog.style.transform = 'translate(-50%,-50%)'
-            this.dialog.style.zIndex = 90
-            this.dialog.style.display = 'none'
+            let dialogStyle = "border-radius:0.25rem;padding:1rem;position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:90;display:none;"
+            this.dialog.style.cssText += dialogStyle
             /*设置header样式*/
             this.header = this.dialog.getElementsByTagName("header")[0]
-            this.header.style.display = 'flex'
-            this.header.style.width = '100%'
-            this.header.style.backgroundColor = '#F0F0F0'
-            this.header.style.justifyContent = 'center'
-            this.header.style.fontSize = '1rem'
+            let headerStyle = "display:flex;justify-content:center;background-color:#F0F0F0;font-size:1rem;"
+            this.header.style.cssText += headerStyle
             /*设置content样式*/
             this.content = this.dialog.getElementsByTagName("content")[0]
-            this.content.style.display = 'block'
-            this.content.style.width = '100%'
-            this.content.style.height = '70%'
-            this.content.style.padding = '1rem 0'
-            this.content.style.marginBottom = "1rem"
-            this.content.style.display = 'flex'
-            this.content.style.flexDirection = 'column'
+            let contentStyle = "padding:1.5rem 0;margin-bottom:1rem;display:flex;flex-direction:column;"
+            this.content.style.cssText += contentStyle
             /*设置content里面元素样式 for循环 或者 forEach循环设置 */
             this.inputGroup = this.dialog.getElementsByClassName("input-group")
             for (var i = 0; i < this.inputGroup.length; i++) {
-                this.inputGroup[i].style.display = 'flex'
-                this.inputGroup[i].style.fontSize = '1.15rem'
-                this.inputGroup[i].style.flexDirection = 'column'
-                this.inputGroup[i].style.justifyContent = 'space-around'
+                let inputStyle = "display:flex;flex-direction:column;font-size:1.15rem;"
+                this.inputGroup[i].style.cssText += inputStyle
             }
-
             /*设置footer样式*/
             this.footer = this.dialog.getElementsByTagName("footer")[0]
-            this.footer.style.display = 'flex'
-            this.footer.style.width = '100%'
-            this.footer.style.backgroundColor = '#F0F0F0'
-            this.footer.style.justifyContent = 'space-between'
-            this.footer.style.fontSize = '1rem'
+            let footerStyle = "display:flex;justify-content:space-between;background-color:#F0F0F0;font-size:1rem;"
+            this.footer.style.cssText += footerStyle
             /*footer 里面子元素样式设置*/
             for (var j = 0; j < this.footer.children.length; j++) {
-                this.footer.children[j].style.margin = '0.5rem'
-                this.footer.children[j].style.cursor = 'pointer'
+                let footerChildrenStyle = "margin:0.5rem;cursor:pointer;"
+                this.footer.children[j].style.cssText += footerChildrenStyle
             }
             /*footer 里面 提交-关闭按钮设置*/
             this.footer.children[1].style.display = 'flex'
             this.submit = this.footer.getElementsByClassName('submit')[0]
-            this.submit.style.padding = '0 1rem'
-            this.submit.style.border = 'none'
-            this.submit.style.borderRadius = '0.25rem'
-            this.submit.style.color = 'white'
-            this.submit.style.backgroundColor = '#3388FF'
-            this.submit.style.cursor = 'pointer'
+            let submitBottonStyle = "border:none;border-radius:0.25rem;padding:0 1rem;background-color:#3388FF;color:white;outline-color:#3388FF;cursor:pointer;"
+            this.submit.style.cssText += submitBottonStyle
 
             this.closed = this.footer.getElementsByClassName('closed')[0]
-            this.closed.style.padding = '0 1rem'
-            this.closed.style.border = 'none'
-            this.closed.style.borderRadius = '0.25rem'
-            this.closed.style.color = 'white'
-            this.closed.style.backgroundColor = '#DC3545'
-            this.closed.style.cursor = 'pointer'
+            let closedButtonStyle = "border:none;border-radius:0.25rem;padding:0 1rem;background-color:#DC3545;color:white;outline-color:#DC3545;cursor:pointer;"
+            this.closed.style.cssText += closedButtonStyle
         },
         event: function () {
             var that = this
@@ -110,12 +74,10 @@
             }
             /*mask触发事件*/
             this.mask.onclick = function () {
+                that.dialog.style.display = 'none'
                 that.setOpacity(that.mask, 0, function () {
-                    //console.log(this) // 此处this 指代window
                     that.mask.style.display = 'none'
-                    that.dialog.style.display = 'none'
                 })
-
             }
             /**提交按钮的事件 */
             /*提交按钮触发 提交内容事件*/
@@ -130,9 +92,9 @@
             }
             /** 关闭按钮的事件*/
             this.closed.onclick = function () {
+                that.dialog.style.display = 'none'
                 that.setOpacity(that.mask, 0, function () {
                     that.mask.style.display = 'none'
-                    that.dialog.style.display = 'none'
                 })
             }
             this.closed.onmouseover = function () {
@@ -150,29 +112,21 @@
             }
             /**注册对话框 input添加 聚焦 失焦事件 */
             if (this.targetDom.id === 'modal-register') {
-                this.input = this.content.getElementsByTagName('input')
-                var inputArr = []
-                for (var k = 0; k < this.input.length; k++) {
-                    this.input[k].style.color = '#999'
-                    //this.input[k].style.fontSize = '1.25rem'
-                    inputArr.push(this.input[k].value) //inputArr 记住input 原value值
-                    /*聚焦事件*/
-                    this.input[k].onfocus = function () {
-                        this.value = '' //  k值不定 利用this 指代 this.input[k] 
-                    }
+                let inputList = this.content.getElementsByTagName('input')
+                let inputArr = []
+                for (var k = 0; k < inputList.length; k++) {
+                    inputList[k].style.color = '#999'
+                    inputArr.push(inputList[k].value); //inputArr 记住input 原value值
                 }
-                /*input 失去焦点事件*/
-                this.input[0].onblur = function () {
-                    this.value = inputArr[0]
-                }
-                this.input[1].onblur = function () {
-                    this.value = inputArr[1]
-                }
-                this.input[2].onblur = function () {
-                    this.value = inputArr[2]
-                }
-                this.input[3].onblur = function () {
-                    this.value = inputArr[3]
+                for (let k in inputList) {
+                    (function () {
+                        inputList[k].onfocus = function () {
+                            this.value == inputArr[k] ? this.value = "" : this.value
+                        }
+                        inputList[k].onblur = function () {
+                            this.value == "" ? this.value = inputArr[k] : this.value
+                        }
+                    }())
                 }
             }
             /** 注册-登录窗口切换跳转事件*/
@@ -181,11 +135,9 @@
                 this.toggle = this.dialog.getElementsByClassName('target-to-register')[0]
                 var targetDom = document.getElementById('modal-register') //或者注册节点
                 this.toggle.onclick = function () {
-                    that.setOpacity(that.mask, 0, function () {
-                        that.mask.style.display = 'none'
-                        that.dialog.style.display = 'none'
-                        targetDom.onclick() //触发注册节点
-                    })
+                    that.dialog.style.display = 'none'
+                    that.mask.style.display = 'none'
+                    targetDom.onclick() //触发注册节点
                 }
             }
             /*注册窗口跳转登录窗口*/
@@ -193,11 +145,9 @@
                 this.toggle = this.dialog.getElementsByClassName('target-to-login')[0]
                 var targetDom = document.getElementById('modal-login') //或者登录节点
                 this.toggle.onclick = function () {
-                    that.setOpacity(that.mask, 0, function () {
-                        that.mask.style.display = 'none'
-                        that.dialog.style.display = 'none'
-                        targetDom.onclick() //触发登录节点
-                    })
+                    that.dialog.style.display = 'none'
+                    that.mask.style.display = 'none'
+                    targetDom.onclick() //触发登录节点
                 }
             }
         },
@@ -215,15 +165,17 @@
                     if (ele.style.opacity >= target) {
                         clearInterval(ele.timer)
                         ele.style.opacity = target
+                        callback && callback()
                     }
                 } else {
                     if (ele.style.opacity <= 0) {
                         clearInterval(ele.timer)
                         ele.style.opacity = 0
+                        callback && callback()
                     }
                 }
             }, 50)
-            callback && callback()
+
         }
     }
 
